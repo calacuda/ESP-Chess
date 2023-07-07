@@ -14,4 +14,4 @@ This project is in it's infancy, EVERYTHING IS SUBJECT TO CHANGE. I'm still wait
 
 ## How it Works
 
-every time a new game is started the the esp32 configured as the ambassador will generate a new world of the configured dimensions. The game world is multi-level and generated using wave-function collapse. The entry to a tower is hidden on a randomly chosen level.
+every time a new game is started the the esp32 configured as the ambassador will generate a new world of the configured dimensions. The game world is multi-level and generated using wave-function collapse in parallel on cluster. The entry to a tower is hidden on a randomly chosen level.
