@@ -9,11 +9,3 @@ pub trait I2cCommunication<T> {
     /// this function is the inverse func of encode. it takes the I2C data and converts it back into a rust struct 
     fn decode_from(&self) -> anyhow::Result<T>;
 }
-
-// pub trait DistributedApiCall<T: I2cCommunication = Self>: I2cCommunication {
-
-// }
-
-// pub trait DistributedApiRes<T: I2cCommunication = Self>: I2cCommunication {
-
-// }
