@@ -1,8 +1,9 @@
 use anyhow::{self, bail};
+use distributed_esp_api::{world::World, I2cAdr, I2C_SPEED};
+use esp_idf_hal::{i2c, peripherals, units::Hertz};
 use esp_idf_sys as _; // If using the `binstart` feature of `esp-idf-sys`, always keep this module imported
-use esp_idf_hal::{i2c, peripherals, peripheral::Peripheral};
 use log::*;
-use distributed_esp_api::I2C_SPEED;
+use shared_bus::{BusManagerSimple, I2cProxy};
 
 pub static I2C_ADDRESS: u8 = 0;
 
@@ -13,17 +14,6 @@ fn main() -> anyhow::Result<()> {
     // Bind the log crate to the ESP Logging facilities
     esp_idf_svc::log::EspLogger::initialize_default();
 
-    let i2c = void_setup()?;
-
-    loop {
-        if let Err(why) = void_loop(&i2c) {
-            error!("a loop iteration failed because: {why}");
-        }
-    }
-    // }
-}
-
-fn void_setup() -> anyhow::Result<i2c::I2cDriver> {
     info!("taking peripherals...");
     let peripherals = match peripherals::Peripherals::take() {
         Some(periph) => periph,
@@ -31,17 +21,35 @@ fn void_setup() -> anyhow::Result<i2c::I2cDriver> {
     };
     info!("peripherals acquired...");
 
-    let i2c = i2c::I2cDriver::new(
+    let i2c_driver = i2c::I2cDriver::new(
         peripherals.i2c0,
         peripherals.pins.gpio4,
         peripherals.pins.gpio5,
-        &i2c::config::Config::new().baudrate(I2C_SPEED.into()),
-    )?;  // raw I2C thing
+        &i2c::config::Config::new().baudrate(Hertz(I2C_SPEED)),
+    )?;
 
-    Ok(i2c)
+    let bus = BusManagerSimple::new(i2c_driver);
+    let mut i2c = bus.acquire_i2c();
+
+    let world: World = void_setup(&i2c)?;
+
+    loop {
+        if let Err(why) = void_loop(&i2c) {
+            error!("a loop iteration failed because: {why}");
+        }
+    }
 }
 
-fn void_loop(i2c: &i2c::I2cDriver) -> anyhow::Result<()> {
-    // TODO: write loop stuff
+fn void_setup(i2c: &I2cProxy) -> anyhow::Result<()> {
+    // let workers: Vec<I2cAdr> = Vec::new();
+
+    // Ok(World::new(&workers))
     Ok(())
 }
+
+fn void_loop(i2c: &I2cProxy) -> anyhow::Result<()> {
+    // TODO: write loop stuff
+
+    Ok(())
+}
+
