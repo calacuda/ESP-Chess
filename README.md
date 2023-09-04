@@ -1,17 +1,18 @@
 # ESP-rogue-xork
 
-A procedurally-generated text-based adventure game run for esp32 cluster utilizing distributed computing.
+A cooperative, multiplayer, procedurally-generated text-based adventure game run on esp32.
 
 ## TLDR
 
-- The goal: Have multiple esp32s pool processor reasorces to serve a procedurally generated text based adventure game.
-- The How: The computer and the esp32 control-node will comunicate over either wireless or serial. The control-node will orchestrate multiple esp32's which comunicate with each other (likely over I2C) to generate the world.
-- The Why: It's a fun way to learn about distributed computing in an embedded context. (and also, why not.)
+each esp32 runs its own game in a unique procedurally generated world. this world is one of a number of biomes -- forest, tundra, desert, etc -- and to beat the game the player bust first play throuhg and concour their own world. they will then gain access to the ability to connect with other players and play through their dungeons as well. clearing each biome yeilds keys which are gathered to beat the game. take heed, every player will have a unique world, with different items, enemies, and paths, meaning there is value in trading biomes with every player you encouunter.
 
 ## Note
 
 This project is in it's infancy, EVERYTHING IS SUBJECT TO CHANGE. I'm still waiting to order more eps32's to properly test project properly.
 
-## How it Works
+## How to Play
 
-every time a new game is started the the esp32 configured as the ambassador will generate a new world of the configured dimensions. The game world is multi-level and generated using wave-function collapse in parallel on cluster. The entry to a tower is hidden on a randomly chosen level.
+1. beat your world.
+2. swap worlds with other players.
+3. beat one of every biome.
+4. memorialize your victory.
