@@ -28,7 +28,7 @@ impl World {
         info!("generating a {} Biome", *BIOME_TYPE);
 
         let boss = todo!("see below");
-        // TODO: make a mod folder for enemies and then make a bos enemy that implents the enemy
+        // TODO: make a mod folder for enemies and then make a boss enemy that implents the enemy
         // trait
 
         let mut level = Level::new(Box::from(boss));

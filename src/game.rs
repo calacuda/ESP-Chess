@@ -21,10 +21,7 @@ pub struct ExploreState {
 
 impl ExploreState {
     fn new() -> Self {
-        Self {
-            loc: (128, 128), // TODO: consider making this either random or set to the "warp_prev"
-                             // location from level 0.
-        }
+        Self { loc: (128, 128) }
     }
 }
 
