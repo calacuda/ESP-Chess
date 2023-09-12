@@ -5,7 +5,7 @@ pub trait Item {
     // TODO: write Item trait
 }
 
-#[derive(Serialize, Deserialize, PartialEq, Eq, Hash)]
+#[derive(Debug, Serialize, Deserialize, PartialEq, Eq, Hash)]
 pub struct ItemKey {
     // level: u8,
     // loc: (u8, u8),

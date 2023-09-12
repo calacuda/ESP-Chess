@@ -1,19 +1,16 @@
 use crate::{
-    get_biome,
+    biome,
+    enemies::boss::Boss,
     level::{Biome, Level},
 };
 use anyhow::Result;
-use lazy_static::lazy_static;
 use log::info;
-
-lazy_static! {
-    pub static ref BIOME_TYPE: Biome = get_biome!("XORK_BIOME");
-}
 
 pub struct World {
     /// the levels that the player has access to (both the players own level and all those they have
     /// traded for)
-    pub levels: Vec<Level>,
+    pub levels: Vec<Level>, // TODO: limit this size based on mem-size and how much a single level
+                            // takes up. make it an array of size (mem-size/level-size).
 }
 
 impl World {
@@ -23,17 +20,18 @@ impl World {
         }
     }
 
-    /// generates the players biome
+    /// generates the players biome using wave form generation
     pub fn generate(&mut self) -> Result<()> {
-        info!("generating a {} Biome", *BIOME_TYPE);
+        let biome = biome!();
 
-        let boss = todo!("see below");
-        // TODO: make a mod folder for enemies and then make a boss enemy that implents the enemy
-        // trait
+        info!("generating a {biome} biome...");
 
+        let boss = Boss::new(biome);
         let mut level = Level::new(Box::from(boss));
         level.init_level()?;
-        self.levels[0] = level;
+        self.levels.push(level);
+
+        info!("biome created.");
 
         Ok(())
     }

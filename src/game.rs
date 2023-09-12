@@ -45,7 +45,7 @@ pub struct StateStack {
 impl StateStack {
     pub fn new() -> Self {
         let mut stack: Vec<Rc<RefCell<dyn State>>> = Vec::with_capacity(3);
-        stack[0] = Rc::from(RefCell::from(ExploreState::new()));
+        stack.push(Rc::from(RefCell::from(ExploreState::new())));
 
         Self { stack }
     }

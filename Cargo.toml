@@ -7,10 +7,7 @@ resolver = "2"
 rust-version = "1.66"
 
 [lib]
-name = "distributed_esp_api"
-
-[env]
-XORK_BIOME = "Town"
+name = "rogue_xork"
 
 [profile.release]
 opt-level = "s"
@@ -45,6 +42,9 @@ serde = {version = "1.0.171", features = ["rc"] }
 serde_json = "1.0.100"
 strum = { version = "0.25.0", features = ["derive"] }
 lazy_static = "1.4.0"
+strum_macros = "0.25.2"
+kahuna = "0.3.0"
+# rogue_xork_macros = { path = "./rogue_xork_macros" }
 # add: https://github.com/esp-rs/esp-storage fo file storage
 
 [build-dependencies]

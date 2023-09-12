@@ -2,6 +2,8 @@ use crate::battle_logic::{BattleAction, BattleState};
 use std::sync::Arc;
 // use serde::{Deserialize, Serialize};
 
+pub mod boss;
+
 pub enum Lifeness {
     Alive,
     Dead,

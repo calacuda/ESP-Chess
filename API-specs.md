@@ -2,6 +2,8 @@
 
 ---
 
+**NOTE:** that this document is wildely out of date and does not reflect the current state of the project. it needs to be re-written.
+
 This document servers to document the comunication API between esp32's.
 
 ## over view

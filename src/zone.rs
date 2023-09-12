@@ -1,22 +1,24 @@
 use crate::enemies::Enemy;
 use crate::items::ItemKey;
+use kahuna::State;
 use std::sync::Arc;
 
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum ZoneType {
     Forest,
     Path,
     Coredor,
     Temple,
-    Desert,
-    Marsh,
     Mountains,
     Sanctuary,
     TreasureRoom,
+    BossEntry,
 }
 
 // TODO: make zone a trait. that way each zone can have unique behavior
 
 /// a single area in a level
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Zone {
     pub name: Arc<str>,
     pub welcome: Arc<str>,
@@ -55,6 +57,7 @@ impl Zone {
 
     pub fn feild_type(&mut self, feild: ZoneType) {
         self.feild_type = feild;
+        // TODO: auto generate enemies, loot, and hidden_loot here.
     }
 
     // pub fn enemies(&mut self, enemies: Vec<Box<dyn Enemy>>) {
@@ -70,19 +73,12 @@ impl Zone {
     // }
 }
 
-// impl I2cCom<Zone> for Zone {
-//     fn encode(&self) -> anyhow::Result<Vec<u8>> {
-//         let json = serde_json::to_string(self)?;
-//
-//         Ok(Vec::from(json.as_bytes()))
-//     }
-//
-//     fn decode_from(&self, data: &[u8]) -> anyhow::Result<Zone> {
-//         let json = String::from_utf8_lossy(data);
-//
-//         Ok(serde_json::from_str(&json)?)
-//     }
-// }
+impl State for Zone {
+    fn entropy(&self) -> u32 {
+        // TODO: figure out how the f to calculate this
+        0
+    }
+}
 
 pub struct BossRoom {
     /// the name of the lair (by default this is "The Lair of <Boss Name>")
