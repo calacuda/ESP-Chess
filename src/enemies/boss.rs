@@ -1,4 +1,4 @@
-use crate::battle_logic::{BattleAction, BattleState};
+use crate::battle_logic::{Battlable, BattleAction, BattleState};
 use crate::enemies::{Enemy, Lifeness};
 use crate::level::Biome;
 use crate::player::Stats;
@@ -44,3 +44,5 @@ impl Enemy for Boss {
         Lifeness::Alive
     }
 }
+
+impl Battlable for Boss {}

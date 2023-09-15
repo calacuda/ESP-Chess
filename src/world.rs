@@ -1,7 +1,7 @@
 use crate::{
     biome,
     enemies::boss::Boss,
-    level::{Biome, Level},
+    level::{Biome, Level, LevelBuilder},
 };
 use anyhow::Result;
 use log::info;
@@ -27,8 +27,8 @@ impl World {
         info!("generating a {biome} biome...");
 
         let boss = Boss::new(biome);
-        let mut level = Level::new(Box::from(boss));
-        level.init_level()?;
+        let level_builder = LevelBuilder::new();
+        let level = level_builder.build(boss)?;
         self.levels.push(level);
 
         info!("biome created.");

@@ -1,4 +1,4 @@
-use crate::game::State;
+use crate::game::GameState;
 use crate::Enemy;
 use crate::Item;
 use crate::Player;
@@ -37,7 +37,7 @@ pub struct BattleState {
     pub turn_n: u16,
 }
 
-impl State for BattleState {
+impl GameState for BattleState {
     #[allow(unused_variables)]
     fn step(&mut self, cmd: &str, player: &Player) -> bool {
         // TODO: implement battle logic and battle command parsing
@@ -59,3 +59,4 @@ pub trait Spell {
 }
 
 // TODO: write a Battlable trait to represnet entities that can enter a battle.
+pub trait Battlable {}

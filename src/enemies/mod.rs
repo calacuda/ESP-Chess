@@ -1,4 +1,4 @@
-use crate::battle_logic::{BattleAction, BattleState};
+use crate::battle_logic::{Battlable, BattleAction, BattleState};
 use std::sync::Arc;
 // use serde::{Deserialize, Serialize};
 
@@ -9,7 +9,7 @@ pub enum Lifeness {
     Dead,
 }
 
-pub trait Enemy {
+pub trait Enemy: Battlable {
     // TODO: write enemy trait
 
     // fn new() -> Self
@@ -34,4 +34,7 @@ pub trait Enemy {
 //     maker_adr: I2cAdr,
 // }
 
-// TODO: impl battle_logic::Battlable for Enemy
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct MobSpawner {}
+
+impl MobSpawner {}

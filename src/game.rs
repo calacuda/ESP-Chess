@@ -5,7 +5,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 /// trait for a game state Explore, Battle, Interact, etc.
-pub trait State {
+pub trait GameState {
     /// a generic step function to step through the state manchine, returns true when ready to exit
     /// (battle ended, etc)
     fn step(&mut self, cmd: &str, player: &Player) -> bool;
@@ -25,7 +25,7 @@ impl ExploreState {
     }
 }
 
-impl State for ExploreState {
+impl GameState for ExploreState {
     fn is_done(&self) -> bool {
         false
     }
@@ -39,12 +39,12 @@ impl State for ExploreState {
 }
 
 pub struct StateStack {
-    stack: Vec<Rc<RefCell<dyn State>>>,
+    stack: Vec<Rc<RefCell<dyn GameState>>>,
 }
 
 impl StateStack {
     pub fn new() -> Self {
-        let mut stack: Vec<Rc<RefCell<dyn State>>> = Vec::with_capacity(3);
+        let mut stack: Vec<Rc<RefCell<dyn GameState>>> = Vec::with_capacity(3);
         stack.push(Rc::from(RefCell::from(ExploreState::new())));
 
         Self { stack }

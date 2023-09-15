@@ -64,7 +64,7 @@ fn main() -> anyhow::Result<()> {
 fn void_setup() -> anyhow::Result<Game> {
     let mut game = Game::new();
     game.world.generate()?;
-    // println!("waiting for world generation to complete...");
+    info!("world created");
 
     Ok(game)
 }
